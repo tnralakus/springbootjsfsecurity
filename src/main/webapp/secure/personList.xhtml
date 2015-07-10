@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<!--xmlns:sec="http://www.springframework.org/security/tags"-->
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <title>Person List</title>
+</h:head>
+<h:body>
+    <h:form id="personList">
+
+        <p:dataTable id="personTable" var="person" value="#{personController.personList}" rows="10" paginator="true">
+            <p:column headerText="Id">
+                <h:commandLink action="#{personController.editSelectedPerson(person.id)}" value="#{person.id}"/>
+            </p:column>
+
+            <p:column headerText="Username">
+                <h:outputText value="#{person.username}"/>
+            </p:column>
+
+            <p:column headerText="E-Mail">
+                <h:outputText value="#{person.email}"/>
+            </p:column>
+            <!--<sec:authorize access="hasAnyRole('ROLE_ADMIN')">   -->
+            <p:column headerText="Delete">
+                <h:commandButton value="Delete" action="#{personController.deletePerson(person.id)}"/>
+            </p:column>
+            <!-- </sec:authorize> -->
+        </p:dataTable>
+        <h:commandButton action="/secure/person.xhtml?faces-redirect=true" value="New Person" immediate="true"/>
+        <h:commandButton action="/secure/index.xhtml?faces-redirect=true" value="Home" immediate="true"/>
+
+        <h:outputLabel value="Username"/>
+        <h:inputText value="#{personController.username}"/>
+        <h:commandButton id="searchButton" value="Search" action="#{personController.search}" process="@form" update=":personList:personTable"/>
+    </h:form>
+</h:body>
+</html>

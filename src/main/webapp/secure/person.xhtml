@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+        >
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <title>Person</title>
+</h:head>
+<h:body>
+    <h:form id="personDetailForm">
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Id"/>
+            <h:inputText value="#{personDetailController.selectedPerson.id}" readonly="true"/>
+            <h:outputLabel value="#{messages['person.username.label']}"/>
+            <h:inputText value="#{personDetailController.selectedPerson.username}" required="true" requiredMessage="Username cannot be empty"/>
+            <h:outputLabel value="E-mail"/>
+            <h:inputText value="#{personDetailController.selectedPerson.email}" required="true" requiredMessage="E-mail cannot be empty"/>
+            <h:commandButton action="#{personDetailController.saveOrUpdatePerson}" value="Save"/>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <h:commandButton action="/secure/personList.xhtml?faces-redirect=true" value="BackToList" immediate="true"/>
+            <h:commandButton action="/secure/index.xhtml?faces-redirect=true" value="Home" immediate="true"/>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
